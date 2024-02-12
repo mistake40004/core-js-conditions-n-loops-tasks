@@ -154,8 +154,64 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  let spaceAdded = false;
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    let word = '';
+    switch (numberStr[i]) {
+      case '0':
+        word = 'zero';
+        break;
+      case '1':
+        word = 'one';
+        break;
+      case '2':
+        word = 'two';
+        break;
+      case '3':
+        word = 'three';
+        break;
+      case '4':
+        word = 'four';
+        break;
+      case '5':
+        word = 'five';
+        break;
+      case '6':
+        word = 'six';
+        break;
+      case '7':
+        word = 'seven';
+        break;
+      case '8':
+        word = 'eight';
+        break;
+      case '9':
+        word = 'nine';
+        break;
+      case '.':
+        word = 'point';
+        break;
+      case '-':
+        word = 'minus';
+        break;
+      case ',':
+        word = 'point';
+        break;
+      default:
+        break;
+    }
+
+    if (spaceAdded) {
+      result += ' ';
+    }
+    result += word;
+    spaceAdded = true;
+  }
+
+  return result;
 }
 
 /**
@@ -290,10 +346,22 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
-}
+function rotateMatrix(matrix) {
+  const newMatrix = matrix;
+  const n = matrix.length;
+  for (let i = 0; i < n; i += 1)
+    for (let j = i + 1; j < n; j += 1)
+      [newMatrix[i][j], newMatrix[j][i]] = [newMatrix[j][i], newMatrix[i][j]];
 
+  for (let i = 0; i < n; i += 1)
+    for (let j = 0; j < Math.floor(n / 2); j += 1)
+      [newMatrix[i][j], newMatrix[i][n - j - 1]] = [
+        newMatrix[i][n - j - 1],
+        newMatrix[i][j],
+      ];
+
+  return newMatrix;
+}
 /**
  * Sorts an array of numbers in ascending order in place.
  * Employ any sorting algorithm of your choice.
